@@ -65,6 +65,35 @@ void unload() //Unloads the linked list and frees the memory (so that valgrind d
   }
 }
 
+void printSorted(int nodes, int index)
+{
+  if (nodes == 1)
+  {
+    //Free memory and print sorted tokens
+    node *ptr = table[index];
+    while (ptr != NULL)
+    {
+      node *next = ptr->next;
+      printf("%s\n", ptr->attribute);
+      ptr = next;
+    }
+  }
+  else if (nodes == 2)
+  {
+    //Free memory and print sorted tokens
+    node *ptr1 = table[0];
+    node *ptr2 = table[index];
+    while (ptr2 != NULL)
+    {
+      node *next1 = ptr1->next;
+      node *next2 = ptr2->next;
+      printf("%s -> %s\n", ptr1->attribute, ptr2->attribute);
+      ptr1 = next1;
+      ptr2 = next2;
+    }
+  }
+}
+
 bool sort(int index, char condition[7]) 
 {
   if (index == 0 && strcmp(condition, "desc") == 0) 
@@ -88,14 +117,7 @@ bool sort(int index, char condition[7])
       }
       c++;
     }
-    //Print sorted tokens
-    node *ptr = table[index];
-    while (ptr->next != NULL)
-    {
-      node *next = ptr->next;
-      printf("%s\n", ptr->attribute);
-      ptr = next;
-    }
+    printSorted(1, index);
   }
   else if (index == 0 && strcmp(condition, "asc") == 0)
   {
@@ -118,14 +140,7 @@ bool sort(int index, char condition[7])
       }
       c++;
     }
-    //Free memory and print sorted tokens
-    node *ptr = table[index];
-    while (ptr != NULL)
-    {
-      node *next = ptr->next;
-      printf("%s\n", ptr->attribute);
-      ptr = next;
-    }
+    printSorted(1, index);
   }
   else if (index == 2 && strcmp(condition, "n") == 0)
   {
@@ -154,17 +169,7 @@ bool sort(int index, char condition[7])
       }
       c++;
     }
-    //Free memory and print sorted tokens
-    node *ptr1 = table[0];
-    node *ptr2 = table[index];
-    while (ptr2 != NULL)
-    {
-      node *next1 = ptr1->next;
-      node *next2 = ptr2->next;
-      printf("%s -> %s\n", ptr1->attribute, ptr2->attribute);
-      ptr1 = next1;
-      ptr2 = next2;
-    }
+    printSorted(2, index);
   }
   else if (index == 4 && strcmp(condition, "asc") == 0)
   {
@@ -193,18 +198,7 @@ bool sort(int index, char condition[7])
       }
       c++;
     }
-
-    //Free memory and print sorted tokens
-    node *ptr1 = table[0];
-    node *ptr2 = table[index];
-    while (ptr2 != NULL)
-    {
-      node *next1 = ptr1->next;
-      node *next2 = ptr2->next;
-      printf("%s -> %s\n", ptr1->attribute, ptr2->attribute);
-      ptr1 = next1;
-      ptr2 = next2;
-    }
+    printSorted(2, index);
   }
   else if (index == 4 && strcmp(condition, "desc") == 0)
   {
@@ -233,18 +227,7 @@ bool sort(int index, char condition[7])
       }
       c++; 
     }
-
-    //Free memory and print sorted tokens
-    node *ptr1 = table[0];
-    node *ptr2 = table[index];
-    while (ptr2 != NULL)
-    {
-      node *next1 = ptr1->next;
-      node *next2 = ptr2->next;
-      printf("%s -> %s\n", ptr1->attribute, ptr2->attribute);
-      ptr1 = next1;
-      ptr2 = next2;
-    }
+    printSorted(2, index);
   }
   return true;
 }
